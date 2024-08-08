@@ -4,10 +4,11 @@
             <div class="row">
                 <div class="col-8 mx-auto">
                     <h1 class="fw-bold spanborder"><span class="hashtag">{{ hashtag }}</span></h1>
-                    <template v-if="data.items.length > 0" v-for="{uuid, cover, title, excerpt, published_at} in data.items">
+                    <template v-if="data.items.length > 0" v-for="({uuid, cover, title, excerpt, published_at} , index) in data.items" :key="index">
                         <CardMedium :cover="cover" :href="`/articles/${uuid}`" :title="title" :excerpt="excerpt" :publishedAt="published_at" />
                     </template>
                     <p v-else class="alert alert-info">No data!</p>
+                    <skeleton-loader-medium v-if="pending" v-for="item in 10" :key="item"/>
                 </div>
             </div>
         </div>
