@@ -16,7 +16,7 @@ func NewUseCase(articleRepository article.Repository) *UseCase {
 	}
 }
 
-func (uc *UseCase) GetArticles(request *Request) (*GetArticlesResponse, error) {
+func (uc *UseCase) Execute(request *Request) (*Response, error) {
 	totalArticles, err := uc.articleRepository.CountPublished()
 	if err != nil {
 		return nil, err
@@ -39,5 +39,5 @@ func (uc *UseCase) GetArticles(request *Request) (*GetArticlesResponse, error) {
 		return nil, err
 	}
 
-	return NewGetArticlesReponse(a, totalPages, currentPage), nil
+	return NewResponse(a, totalPages, currentPage), nil
 }
